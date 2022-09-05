@@ -1,10 +1,8 @@
 let grid = document.getElementById('grid');
 let gridLength = 50;
 
-
 createSquares(gridLength, grid);
-const squares = Array.from(document.querySelectorAll('.square'));
-squares.forEach(square => square.addEventListener('mouseover', hoverEvent));
+
 
 function createSquares(gridLength, grid){
     let gridWidth = grid.offsetWidth;
@@ -16,10 +14,19 @@ function createSquares(gridLength, grid){
         newSquare.style.height = squareSize + "px";
         grid.appendChild(newSquare);
     }
+    enableHover();
 }
 
-function removeSquares(grid){
+function removeSquares(){
+    const squares = document.querySelectorAll('.square');
+    squares.forEach(square => {
+        square.remove();
+    })
+}
 
+function enableHover(){
+    const squares = Array.from(document.querySelectorAll('.square'));
+    squares.forEach(square => square.addEventListener('mouseover', hoverEvent));
 }
 
 function hoverEvent(e){
@@ -35,9 +42,9 @@ function newGrid() {
         msg.innerHTML = "Error: Please enter a number between 0 and 100."
     } else {
         msg.innerHTML = "Current sketchpad is " + gridLength + " x " + gridLength + ".";
+        removeSquares();
+        createSquares(gridLength, grid);
     }
 }
 
-function enableHover(){
 
-}
